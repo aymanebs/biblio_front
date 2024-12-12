@@ -3,6 +3,8 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ConfirmRegister from "../pages/Auth/ConfirmRegister";
 import AuthLayout from "../components/layouts/AuthLayout";
+import Home from "../pages/Home";
+
 
 
 
@@ -15,6 +17,7 @@ const AppRouter = ()=>{
             <Route path="/register" element={<Register/>}/>
             <Route path="/register/confirm" element={<ConfirmRegister/>} />
         </Route>
+        <Route path="/" element={<Home/>}></Route>
         </Routes>
     )
     

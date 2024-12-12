@@ -91,3 +91,11 @@ export const resendConfirmationCode = (email)=>{
     })
 }
 
+export const signOut = ()=>{
+    const cognitoUser = userPool.getCurrentUser();
+    console.log('cognitoUser',cognitoUser);
+    if(cognitoUser){
+        cognitoUser.signOut();
+    }
+}
+
