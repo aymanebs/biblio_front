@@ -10,8 +10,9 @@ const HomeLayout = ()=>{
     return(
         <>
         <NavbarComponent/>
-    
-        <Outlet/>
+        <main>
+            <Outlet/>
+        </main>  
         <FooterComponent/>
         </>
     )

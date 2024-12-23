@@ -19,8 +19,8 @@ export function FooterComponent() {
             <Footer.Link href="#">Contact</Footer.Link>
           </Footer.LinkGroup>
         </div>
-        <Footer.Divider />
-        <Footer.Copyright href="#" by="Bookindro™" year={2024} />
+        {/* <Footer.Divider />
+        <Footer.Copyright href="#" by="Bookindro™" year={2024} /> */}
       </div>
     </Footer>
   );

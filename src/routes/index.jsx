@@ -5,6 +5,11 @@ import ConfirmRegister from "../pages/Auth/ConfirmRegister";
 import AuthLayout from "../components/layouts/AuthLayout";
 import Home from "../pages/Home";
 import HomeLayout from "../components/layouts/HomeLayout";
+import DashboardLayout from "../components/layouts/DashboardLayout";
+import Books from "../pages/Dashboard/books";
+import { Genres } from "../pages/Dashboard/Genres";
+import { Users } from "../pages/Dashboard/Users";
+
 
 const AppRouter = ()=>{
 
@@ -16,7 +21,13 @@ const AppRouter = ()=>{
             <Route path="/register/confirm" element={<ConfirmRegister/>} />
         </Route>    
         <Route element={<HomeLayout/>}>
-            <Route path="/" element={<Home/>}></Route>
+            <Route path="/" element={<Home/>} />
+        </Route>
+
+        <Route element={<DashboardLayout/>}>
+            <Route path="/dashboard/books" element={<Books/>}/> 
+            <Route path="/dashboard/genres" element={<Genres/>}/>
+            <Route path="/dashboard/users" element={<Users/>}/>
         </Route>
         
         </Routes>

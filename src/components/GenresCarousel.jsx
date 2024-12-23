@@ -16,7 +16,7 @@ const genres = [
 
 const GenresCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsToShow = 5; // Number of items visible at once
+  const itemsToShow = 5; 
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
