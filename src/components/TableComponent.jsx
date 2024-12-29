@@ -1,4 +1,5 @@
 import { Checkbox, Table } from "flowbite-react";
+import { ActionButtons } from "./ActionButtons";
 
 const TableComponent = ({headers, items})=>{
   return (
@@ -41,9 +42,11 @@ const TableComponent = ({headers, items})=>{
              
          
              <Table.Cell>
-               <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+               {/* <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                  Edit
-               </a>
+               </a> */}
+               <ActionButtons/>
+               
              </Table.Cell>
            </Table.Row>
           ))}

@@ -9,6 +9,10 @@ import DashboardLayout from "../components/layouts/DashboardLayout";
 import Books from "../pages/Dashboard/books";
 import { Genres } from "../pages/Dashboard/Genres";
 import { Users } from "../pages/Dashboard/Users";
+import { DashIndex } from "../pages/Dashboard/DashIndex";
+import { Collections } from "../pages/Collections";
+import { BookDetails } from "../pages/BookDetails";
+import { BookCollectionPage } from "../pages/BookCollectionPage";
 
 
 const AppRouter = ()=>{
@@ -22,9 +26,13 @@ const AppRouter = ()=>{
         </Route>    
         <Route element={<HomeLayout/>}>
             <Route path="/" element={<Home/>} />
+            <Route path="/collections" element={<Collections/>} />
+            <Route path="/bookDetails" element={<BookDetails/>}/>
+            <Route path="/BookCollectionPage" element={<BookCollectionPage/>}/>
         </Route>
 
         <Route element={<DashboardLayout/>}>
+            <Route path="/dashboard" element={<DashIndex/>}/>
             <Route path="/dashboard/books" element={<Books/>}/> 
             <Route path="/dashboard/genres" element={<Genres/>}/>
             <Route path="/dashboard/users" element={<Users/>}/>

@@ -35,7 +35,7 @@ const SidebarComponent = ()=>{
     <Sidebar aria-label="Default sidebar example" theme={customTheme}>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Sidebar.Item href="#" icon={HiChartPie}>
+          <Sidebar.Item href="/dashboard" icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
           <Sidebar.Item href="/dashboard/books" icon={HiBookOpen} label="3">

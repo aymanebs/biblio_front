@@ -1,12 +1,12 @@
-
 import { BreadCrumbComponent } from "../../components/BreadCrumbComponent";
 import TableComponent from "../../components/TableComponent";
 import { PaginationComponent } from "../../components/PaginationComponent";
 import { DashHeader } from "../../components/DashHeader";
+import { HiHome } from "react-icons/hi";
 
 const headers=['a','b','c','d'];
 const tableItems =[{a: 'the power of now',b: 'the power of now',c: 'the power of now'}]
-const breadItems=[{name:"Books",link:"/dashboard/books"}]
+const breadItems=[{name:"Home",link:"/dashboard",icon:HiHome},{name:"Books",link:"/dashboard/books"}]
 
 const Books = () => {
   return (

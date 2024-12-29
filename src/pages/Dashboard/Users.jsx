@@ -1,9 +1,10 @@
+import { HiHome } from "react-icons/hi";
 import { BreadCrumbComponent } from "../../components/BreadCrumbComponent"
 import { DashHeader } from "../../components/DashHeader"
 import { PaginationComponent } from "../../components/PaginationComponent"
 import TableComponent from "../../components/TableComponent"
 
-const breadItems =[{name:"Users",link:"/dashboard/users"}];
+const breadItems =[{name:"Home",link:"/dashboard",icon:HiHome},{name:"Users",link:"/dashboard/users"}];
 const headers=['a','b'];
 const tableItems=[{'a':'bbb','b':'vvvvv'}];
 
