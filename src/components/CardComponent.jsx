@@ -3,7 +3,7 @@ import { Card } from "flowbite-react";
 export function CardComponent() {
   return (
     <a
-      href="/book-details" // Replace with your actual book details URL
+      href="/bookDetails" 
       className="group relative block max-w-[10rem] hover:scale-105 transition-transform rounded-lg"
     >
       {/* Stars positioned above the cover */}

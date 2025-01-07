@@ -1,7 +1,7 @@
 
 const cognitoConfig = {
-    UserPoolId: "us-east-1_PlfP7RAP2",
-    ClientId:"372jn2mhc90le8h18kptgts7a4",
+    UserPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
+    ClientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
 }
 
 export default cognitoConfig;

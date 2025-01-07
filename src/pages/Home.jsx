@@ -1,10 +1,44 @@
+import { useEffect } from "react";
 import { CardComponent } from "../components/CardComponent";
 import GenresCarousel from "../components/GenresCarousel";
 import Jumbotron from "../components/Jumbotron";
 import PromotionalBanner from "../components/PromotionalBanner";
+import { getAllBooks } from "../api/bookApi";
+import { getCurrentUser, getSession } from "../services/authService";
+import {  jwtDecode } from 'jwt-decode';
 
+
+// const session = await  getSession();
+// console.log('session: ',session);
+// console.log('getCurrentUser()', await getCurrentUser());
+
+// const currentUser= await getCurrentUser();
+// console.log("currentUser",currentUser);
+// const accessToken = session.accessToken.jwtToken;
+// const decodedToken =  jwtDecode(accessToken);
+// console.log('decodedToken',decodedToken["cognito:groups"]);
+// console.log("*******************************************",decodedToken["cognito:groups"].includes('Client'))
 
 const Home= ()=>{
+
+    useEffect(()=>{
+        const fetchBooks = async()=>{
+            try{
+                const response = await getAllBooks();
+                console.log("books",response);
+            }
+            catch(error){
+                console.log("Error fetching books", error);
+            }
+        }
+        fetchBooks();
+    
+    },[]);
+
+
+
+
+    
     return(
         <>
         <Jumbotron/>

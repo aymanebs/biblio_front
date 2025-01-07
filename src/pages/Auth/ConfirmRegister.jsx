@@ -3,9 +3,12 @@ import { Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { HiMail } from "react-icons/hi";
 import { confirmSignUp, resendConfirmationCode } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 
 const ConfirmRegister = ()=>{
+
+    const navigate = useNavigate();
 
     const [otp,setOtp] = useState(null);
     const [email,setEmail] =useState(null);
@@ -15,12 +18,13 @@ const ConfirmRegister = ()=>{
         console.log('otp inside parent',otpValue);
     }
     
-    const handleSubmit =(e)=>{
+    const handleSubmit =async (e)=>{
         
         e.preventDefault();
         try{
-            confirmSignUp(email,otp.join(''));
-            console.log('otp.toString()',otp.join(''))
+            await confirmSignUp(email,otp.join(''));
+            console.log('otp.toString()',otp.join(''));
+            navigate('/login');
         }
         catch(error){
             console.error(error);

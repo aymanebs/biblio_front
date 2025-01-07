@@ -1,6 +1,8 @@
 import cognitoConfig from "../config/cognitoConfig";
 import {CognitoUserPool,CognitoUser,AuthenticationDetails,} from "amazon-cognito-identity-js"
 
+
+
 const userPool = new CognitoUserPool({
     UserPoolId: cognitoConfig.UserPoolId,
     ClientId: cognitoConfig.ClientId,
@@ -49,6 +51,7 @@ export const signIn = (email,password)=>{
 
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: (result) =>{
+                console.log('login result: ',result);
                 resolve(result);
             },
             onFailure: (err)=>{
@@ -93,9 +96,68 @@ export const resendConfirmationCode = (email)=>{
 
 export const signOut = ()=>{
     const cognitoUser = userPool.getCurrentUser();
-    console.log('cognitoUser',cognitoUser);
+    console.log('cognitoUser logout-----------',cognitoUser);
     if(cognitoUser){
         cognitoUser.signOut();
     }
 }
+
+export function getSession() {
+    const cognitoUser = userPool.getCurrentUser();
+  
+    return new Promise((resolve, reject) => {
+      if (!cognitoUser) {
+        reject(new Error("No user found"));
+        return;
+      }
+  
+      cognitoUser.getSession((err, session) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        console.log('session.isValid()',session.isValid())
+  
+        if (!session.isValid()) {
+          reject(new Error("Session has expired"));
+          return;
+        }
+  
+        resolve(session);
+      });
+    });
+  }
+  
+
+
+  export async function getCurrentUser() {
+    return new Promise((resolve, reject) => {
+      const cognitoUser = userPool.getCurrentUser()
+  
+      if (!cognitoUser) {
+        reject(new Error("No user found"))
+        return
+      }
+  
+      cognitoUser.getSession((err, session) => {
+        if (err) {
+          reject(err)
+          return
+        }
+        cognitoUser.getUserAttributes((err, attributes) => {
+          if (err) {
+            reject(err)
+            return
+          }
+          const userData = attributes.reduce((acc, attribute) => {
+            acc[attribute.Name] = attribute.Value
+            return acc
+          }, {})
+  
+          resolve({ ...userData, username: cognitoUser.username })
+        })
+      })
+    })
+  }
 

@@ -1,14 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CardComponent } from "../components/CardComponent";
+import { getAllBooks } from "../api/bookApi";  // Ensure you import your API function
 
 export const BookCollectionPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
-  const books = Array(12).fill(null); // Replace with your book data
+  const [books, setBooks] = useState([]);  // Ensure this is an empty array initially
+  const [loading, setLoading] = useState(true);  // Loading state
+  const [error, setError] = useState(null);  // Error state
 
+  // Fetch books from API
+  useEffect(() => {
+    const fetchBooks = async () => {
+      setLoading(true);
+      setError(null);  // Reset error before new fetch
+      try {
+        const fetchedBooks = await getAllBooks(); // Replace with your actual fetch logic
+        // Ensure fetchedBooks is always an array
+        setBooks(Array.isArray(fetchedBooks) ? fetchedBooks : []);
+      } catch (error) {
+        setError("Failed to fetch books. Please try again later.");
+        console.error("Error fetching books:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBooks();
+  }, []);  
+
+  // Filter books based on search term and filter selection
   const filteredBooks = books.filter((book) => {
-    // Add your filtering logic here based on `searchTerm` and `filter`
-    return true; // Placeholder to return all books
+    const matchesSearchTerm = book.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filter === "all" || book.genre === filter;
+    return matchesSearchTerm && matchesFilter;
   });
 
   return (
@@ -47,17 +72,30 @@ export const BookCollectionPage = () => {
           </select>
         </div>
 
+        {/* Loading Indicator */}
+        {loading && <div className="text-center text-gray-600 mt-4">Loading books...</div>}
+
+        {/* Error Message */}
+        {error && <div className="text-center text-red-600 mt-4">{error}</div>}
+
         {/* Book Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12">
-          {filteredBooks.length > 0 ? (
-            filteredBooks.map((_, index) => <CardComponent key={index} />)
-          ) : (
-            <p className="col-span-full text-center text-gray-600">
-              No books found. Try adjusting your search or filters.
-            </p>
-          )}
-        </div>
+        {books.length === 0 && !loading && !error ? (
+          <p className="col-span-full text-center text-gray-600 mt-6">
+            No books available at the moment. Please check back later.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12">
+            {filteredBooks.length > 0 ? (
+              filteredBooks.map((book) => <CardComponent key={book.id} book={book} />) 
+            ) : (
+              <p className="col-span-full text-center text-gray-600">
+                No books found. Try adjusting your search or filters.
+              </p>
+            )}
+          </div>
+          
+        )}
       </div>
     </div>
   );
-}
+};

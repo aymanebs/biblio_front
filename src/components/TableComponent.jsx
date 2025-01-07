@@ -1,7 +1,7 @@
 import { Checkbox, Table } from "flowbite-react";
 import { ActionButtons } from "./ActionButtons";
 
-const TableComponent = ({headers, items})=>{
+const TableComponent = ({ headers, items = [], onEdit, onDelete }) => {
   return (
     <div className="overflow-x-auto">
       <Table hoverable>
@@ -9,53 +9,35 @@ const TableComponent = ({headers, items})=>{
           <Table.HeadCell className="p-4">
             <Checkbox />
           </Table.HeadCell>
-          {
-            headers.map((header)=>(
-              <Table.HeadCell key={header}>{header}</Table.HeadCell>
-            ))
-          }
+          {headers.map((header) => (
+            <Table.HeadCell key={header}>{header}</Table.HeadCell>
+          ))}
           <Table.HeadCell>
-            <span className="">Actions</span>
+            <span>Actions</span>
           </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-
-          {items.map((item)=>(
-             <Table.Row key={item.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-             <Table.Cell className="p-4">
-               <Checkbox />
-             </Table.Cell>
-            { item.cover &&(
-              <Table.Cell className="flex justify-start">
-               <img
-                 src="https://via.placeholder.com/50"
-                 alt="Book Cover"
-                 className="w-12 h-12 object-cover ml-4 rounded-sm"
-               />
+          {items.map((item) => (
+            <Table.Row key={item.id}>
+              <Table.Cell className="p-4">
+                <Checkbox />
               </Table.Cell>
-             )
-            }
-             
-            {headers.map((header)=>
-             (<Table.Cell key={header}>{item[header]}</Table.Cell>)       
-            )}
-             
-         
-             <Table.Cell>
-               {/* <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                 Edit
-               </a> */}
-               <ActionButtons/>
-               
-             </Table.Cell>
-           </Table.Row>
+              {headers.map((header) => (
+                <Table.Cell key={header}>{item[header]}</Table.Cell>
+              ))}
+              <Table.Cell>
+                <ActionButtons
+                  onEdit={() => onEdit(item)}
+                  onDelete={() => onDelete(item.id)}
+                />
+              </Table.Cell>
+            </Table.Row>
           ))}
-         
- 
         </Table.Body>
       </Table>
     </div>
   );
-}
+};
+
 
 export default TableComponent;

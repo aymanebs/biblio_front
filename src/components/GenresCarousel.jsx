@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Book, BookOpen, BookMarked, BookUp, Bookmark, BookDown, BookKey, BookLock, BookPlus, BookTemplate, Wand, CircleHelp, HeartHandshake, BookHeart, Rocket, ScanEye } from 'lucide-react';
 
 const genres = [
-  { icon: Book, name: 'Fiction' },
-  { icon: BookOpen, name: 'Non-Fiction' },
-  { icon: CircleHelp, name: 'Mystery' },
-  { icon: HeartHandshake, name: 'Self-Help' },
-  { icon: BookHeart, name: 'Romance' },
-  { icon: Rocket, name: 'Science Fiction' },
-  { icon: Wand, name: 'Fantasy' },
-  { icon: BookLock, name: 'Thriller' },
-  { icon: ScanEye, name: 'Biography' },
-  { icon: BookTemplate, name: 'History' },
+    { icon: Book, name: 'Fiction' },
+    { icon: BookOpen, name: 'Non-Fiction' },
+    { icon: CircleHelp, name: 'Mystery' },
+    { icon: HeartHandshake, name: 'Self-Help' },
+    { icon: BookHeart, name: 'Romance' },
+    { icon: Rocket, name: 'Science Fiction' },
+    { icon: Wand, name: 'Fantasy' },
+    { icon: BookLock, name: 'Thriller' },
+    { icon: ScanEye, name: 'Biography' },
+    { icon: BookTemplate, name: 'History' },
 ];
 
 const GenresCarousel = () => {
