@@ -6,7 +6,7 @@ import AuthLayout from "../components/layouts/AuthLayout";
 import Home from "../pages/Home";
 import HomeLayout from "../components/layouts/HomeLayout";
 import DashboardLayout from "../components/layouts/DashboardLayout";
-import Books from "../pages/Dashboard/books";
+import Books from "../pages/Dashboard/Books";
 import { Genres } from "../pages/Dashboard/Genres";
 import { Users } from "../pages/Dashboard/Users";
 import { DashIndex } from "../pages/Dashboard/DashIndex";
