@@ -1,23 +1,36 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { signIn } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserLoggedIn } from "../../store/userSlice";
 
 
 const Login = () =>{
 
   const [email,setEmail] = useState(null);
   const [password, setPassword] =useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
     try{
-      await signIn(email,password);
+      console.log('before sign in');
+      const response = await signIn(email,password);
+      dispatch(setUserLoggedIn());
+      const cognitoGroups = response?.accessToken?.payload['cognito:groups'];
+      if(cognitoGroups && cognitoGroups.includes('Admin')){
+        navigate('/dashboard');
+      }
+      else{
+        navigate('/');
+      }
+
     }
     catch(error){
       console.error(error);
     }
-
-
   }
 
     return(
